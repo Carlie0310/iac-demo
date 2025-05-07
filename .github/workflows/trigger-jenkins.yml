@@ -1,0 +1,13 @@
+name: Trigger Jenkins
+
+on:
+  push:
+    branches: main
+
+jobs:
+  trigger-jenkins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jenkins build
+        run: |
+          curl -X POST http://ip10-0-14-7-d0dgra805akh4glkf930-8080.direct.lab-boris.fr/job/iac-pipeline/build --user "admin:11e1c56e671b3a9e3c4724710863c35efe" 
