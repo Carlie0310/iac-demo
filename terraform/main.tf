@@ -32,3 +32,4 @@ resource "aws_instance" "demo" {
     Name = "LocalStackDemo-${count.index + 1}"
   }
 }
+
