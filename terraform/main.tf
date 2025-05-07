@@ -16,20 +16,18 @@ provider "aws" {
 resource "random_id" "ami_trigger" {
   byte_length = 2
 
-  # Keepers forces regeneration each run by changing this value
-  keepers = {
-    run_timestamp = timestamp()
-  }
-}
-
 resource "aws_instance" "demo" {
-  count         = var.instance_count
-  # Use a random AMI string so Terraform sees a change each commit
   ami           = "ami-${random_id.ami_trigger.hex}"
   instance_type = "t2.micro"
 
   tags = {
-    Name = "LocalStackDemo-${count.index + 1}"
+    Name = "demo"
+    ImageID = "ami-${random_id.ami_trigger.hex}"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
+
 
