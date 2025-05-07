@@ -15,7 +15,7 @@ provider "aws" {
 # Generate a new pseudo-AMI ID on every apply (using the current timestamp)
 resource "random_id" "ami_trigger" {
   byte_length = 2
-
+}
 resource "aws_instance" "demo" {
   ami           = "ami-${random_id.ami_trigger.hex}"
   instance_type = "t2.micro"
